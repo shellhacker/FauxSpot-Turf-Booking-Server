@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const { sendOtpEmail } = require("../otpHandler/nodemailer")
-let otpGlobal
 const twilio = require("../otpHandler/twilio")
 const crypto = require("crypto")
 
@@ -30,11 +29,15 @@ module.exports = {
                 res.status(404).json({ "status": false, "message": "user already registerd" })
 
             } else {
+
+                const response = await sendOtpEmail(user.user_mail, user.user_name)
+
                 const user = User({
                     user_mail,
                     user_number: 0000000000,
                     user_password,
                     user_isVerified: false,
+                    user_otp: response
                 })
 
                 const salt = await bcrypt.genSalt(10)
@@ -43,12 +46,10 @@ module.exports = {
 
                 // send a verification mail to user
 
-                const response = await sendOtpEmail(user.user_mail, user.user_name)
+
 
                 if (response != null) {
                     await user.save()
-                    otpGlobal = response
-                    console.log(otpGlobal);
                 }
 
                 if (response == null) {
@@ -70,15 +71,15 @@ module.exports = {
 
     emailVerifyOtp: asyncHandler(async (req, res, next) => {
         const { user_otp, _id } = req.body
-        console.log("user otp" + user_otp + "send otp" + otpGlobal);
-        if (user_otp == otpGlobal) {
-            console.log("user otp  " + user_otp + "   send otp  " + otpGlobal);
-            const add = await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
-            res.status(200).json({ "status": true, "message": "login success" })
 
-        } else {
+        await User.findById({ _id }).then(async (user) => {
+            if (user_otp == user.user_otp) {
+                await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
+                res.status(200).json({ "status": true, "message": "login success" })
+            }
+        }).catch((err) => {
             res.status(401).json({ "status": false, "message": "please check otp" })
-        }
+        })
 
     }),
 
@@ -127,26 +128,26 @@ module.exports = {
     mobileSignup: asyncHandler(async (req, res, next) => {
         const { user_number } = req.body
         const result = await twilio.sendOtp(user_number)
-        
+
         if (result == "verification") {
 
             const findUser = await User.findOne({ user_number: user_number })
 
-            if(findUser){
+            if (findUser) {
                 res.status(200).json({ "status": true, "_id": findUser._id })
 
-            }else{
+            } else {
                 const user = User({
                     user_mail: crypto.randomBytes(64).toString("hex"),
                     user_number,
                     user_password: crypto.randomBytes(64).toString("hex"),
                     user_isVerified: false,
                 })
-    
+
                 await user.save()
                 res.status(200).json({ "status": true, "_id": user._id })
             }
-            
+
         } else {
             res.status(401).json({ "status": false, "_id": "user not found" })
         }
