@@ -30,7 +30,7 @@ module.exports = {
 
             } else {
 
-                const response = await sendOtpEmail(user.user_mail, user.user_name)
+                const response = await sendOtpEmail(user_mail)
 
                 const user = User({
                     user_mail,
@@ -101,9 +101,9 @@ module.exports = {
 
                 const match = await bcrypt.compare(user_password, findUser.user_password)
 
-                if (match) {
+                const token = createToken(findUser.id)
 
-                    const token = createToken(findUser.id)
+                if (match) {
 
                     res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token })
                 } else {
@@ -129,6 +129,8 @@ module.exports = {
         const { user_number } = req.body
         const result = await twilio.sendOtp(user_number)
 
+        console.log(result);
+
         if (result == "verification") {
 
             const findUser = await User.findOne({ user_number: user_number })
@@ -145,7 +147,7 @@ module.exports = {
                 })
 
                 await user.save()
-                res.status(200).json({ "status": true, "_id": user._id })
+                res.status(200).json({ "status": true, "_id": user._id , "otp" : result})
             }
 
         } else {
@@ -165,13 +167,15 @@ module.exports = {
             console.log(response);
             console.log("verification progress");
             if (response === 'approved') {
+                const tokn =  createToken(_id)
+                
                 console.log("account verified");
                 const add = await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
-                const tokn = createToken(_id)
+               
                 res.status(200).json({ "status": true, "jwt": tokn })
             } else {
                 console.log("error");
-                res.status(401).json({ "status": false, "jwt": "tokn not found" })
+                res.status(401).json({ "status": false, "jwt": "chcek otp" })
             }
         } catch (error) {
             res.status(401).json({ "status": false, "jwt": "tokn not found" })

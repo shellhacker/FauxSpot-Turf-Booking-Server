@@ -5,7 +5,7 @@ require('dotenv').config({ path: '/.env' })
 
 
 module.exports = {
-    sendOtpEmail: async (email, name) => new Promise(async (resolve, reject) => {
+    sendOtpEmail: async (email                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ) => new Promise(async (resolve, reject) => {
         const otpCode = Math.floor(1000 + Math.random() * 9000)
         const transporter = nodemailer.createTransport({
 
@@ -22,10 +22,10 @@ module.exports = {
         const handlebarOptions = {
             viewEngine: {
                 extName: ".handlebars",
-                partialsDir: path.resolve("./template"),
+                partialsDir: path.resolve("./view"),
                 defaultLayout: false
             },
-            viewPath: path.resolve("./template"),
+            viewPath: path.resolve("./view"),
             extName: ".handlebars"
         }
 
