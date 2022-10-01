@@ -4,8 +4,6 @@ const productController = require("../controller/addProductController")
 const { upload } = require("../uploads/multer")
 
 
-
-
 router.post("/addturf", upload.fields([
     { name: "turf_images1", maxCount: 1 },
     { name: "turf_images2", maxCount: 1 },
