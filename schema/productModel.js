@@ -19,9 +19,12 @@ const productSchema = new mongoose.Schema(
         {
             turf_sevens: { type: Boolean },
             turf_sixes: { type: Boolean },
-        }
-        ,
-        turf_isAvailale: { type: Boolean },
+        },
+        turf_info: { 
+            turf_isAvailale: { type: Boolean },
+            turf_rating: { type: Number },
+            turf_map : { type: String },
+        },
         turf_amenities:
         {
             turf_washroom: { type: Boolean },
