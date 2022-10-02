@@ -19,8 +19,7 @@ module.exports = {
       const image3 = await cloudinaryUploadImg(turf_images3Obj);
 
       const dbObj = req.body
-      console.log(dbObj.turf_map, dbObj.turf_rating , dbObj.turf_isAvailale);
-
+     
       const product = Product({
         turf_creator_id: dbObj.turf_creator_id,
         turf_name: dbObj.turf_name,
