@@ -48,7 +48,7 @@ module.exports = {
           turf_washroom: dbObj.urf_washroom,
           turf_water: dbObj.turf_water,
           turf_dressing: dbObj.turf_dressing,
-          turf_parking: dbObj.turf_parcking,
+          turf_parking: dbObj.turf_parking,
           turf_gallery: dbObj.turf_gallery,
           turf_cafeteria: dbObj.turf_cafeteria
         }
