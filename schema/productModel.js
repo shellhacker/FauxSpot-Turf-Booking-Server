@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
         }
         ,
         turf_isAvailale: { type: Boolean },
-        amenities:
+        turf_amenities:
         {
             turf_washroom: { type: Boolean },
             turf_water: { type: Boolean },

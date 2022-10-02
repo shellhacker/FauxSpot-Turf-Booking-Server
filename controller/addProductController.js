@@ -18,9 +18,7 @@ module.exports = {
       const image2 = await cloudinaryUploadImg(turf_images2Obj);
       const image3 = await cloudinaryUploadImg(turf_images3Obj);
 
-
       const dbObj = req.body
-
 
       const product = Product({
         turf_creator_id: dbObj.turf_creator_id,
@@ -45,7 +43,7 @@ module.exports = {
         turf_isAvailale: dbObj.turf_isAvailale,
         turf_amenities:
         {
-          turf_washroom: dbObj.urf_washroom,
+          turf_washroom: dbObj.turf_washroom,
           turf_water: dbObj.turf_water,
           turf_dressing: dbObj.turf_dressing,
           turf_parking: dbObj.turf_parking,
