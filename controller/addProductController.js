@@ -84,13 +84,43 @@ module.exports = {
   }),
 
   updateProduct: asyncHandler(async (req, res) => {
-
     try {
       const _id = req.params.id
       const dbObj = req.body
-      const result = await Product.findByIdAndUpdate(_id, dbObj, { new: true });
-      res.status(200).json({ "status": true, "message": "Product Updated Successfully" })
+      const items = {
+        turf_name: dbObj.data[0].turf_name,
+        turf_time: {
+          time_morning: dbObj.data[0].turf_time.time_morning,
+          time_afternoon: dbObj.data[0].turf_time.time_afternoon,
+          time_evening: dbObj.data[0].turf_time.time_evening
+        },
+        turf_amenities: {
+          turf_cafeteria: dbObj.data[0].turf_amenities.turf_cafeteria,
+          turf_dressing: dbObj.data[0].turf_amenities.turf_dressing,
+          turf_gallery: dbObj.data[0].turf_amenities.turf_gallery,
+          turf_parking: dbObj.data[0].turf_amenities.turf_parking,
+          turf_water: dbObj.data[0].turf_amenities.turf_water,
+          turf_washroom: dbObj.data[0].turf_amenities.turf_washroom
+        },
+        turf_catogery: {
+          turf_badminton: dbObj.data[0].turf_catogery.turf_badminton,
+          turf_cricket: dbObj.data[0].turf_catogery.turf_cricket,
+          turf_football: dbObj.data[0].turf_catogery.turf_football,
+          turf_yoga: dbObj.data[0].turf_catogery.turf_yoga
+        },
+        turf_type: {
+          turf_sevens: dbObj.data[0].turf_type.turf_sevens,
+          turf_sixes: dbObj.data[0].turf_type.turf_sixes
+        },
+        turf_info: {
+          turf_isAvailale: dbObj.data[0].turf_info.turf_isAvailale,
+          turf_map: dbObj.data[0].turf_info.turf_map,
+          turf_rating: dbObj.data[0].turf_info.turf_rating
+        },
+      }
 
+      await Product.findByIdAndUpdate({ _id: _id }, items, { multi: true })
+      res.status(200).json({ "status": true })
     } catch (error) {
       res.status(401).json({ "status": false, "message": error })
     }
