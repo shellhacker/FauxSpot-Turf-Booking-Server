@@ -1,7 +1,8 @@
 const mongoose = require("mongoose")
 
-const productSchema = new mongoose.Schema(
+const wishlistSchema = new mongoose.Schema(
     {
+        turf_user_id: { type: String },
         turf_creator_id: { type: String },
         turf_name: { type: String },
         turf_place: { type: String },
@@ -52,6 +53,6 @@ const productSchema = new mongoose.Schema(
     }
 )
 
-const model = mongoose.model("turfList", productSchema)
+const model = mongoose.model("wishlist", wishlistSchema)
 
 module.exports = model

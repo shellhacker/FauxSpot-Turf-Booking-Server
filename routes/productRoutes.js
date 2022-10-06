@@ -10,5 +10,6 @@ router.post("/addturf", upload.fields([
     { name: "turf_images3", maxCount: 1 }
 ]), productController.addProduct)
 
+router.patch("/updateturf/:id", productController.updateProduct)
 
 module.exports = router   
