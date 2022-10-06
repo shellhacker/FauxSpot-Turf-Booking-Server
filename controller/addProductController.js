@@ -120,7 +120,7 @@ module.exports = {
       }
 
       await Product.findByIdAndUpdate({ _id: _id }, items, { multi: true })
-      res.status(200).json({ "status": true })
+      res.status(200).json({ "status": true , "message": "Updated Successfully"})
     } catch (error) {
       res.status(401).json({ "status": false, "message": error })
     }
