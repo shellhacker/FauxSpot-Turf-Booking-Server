@@ -9,7 +9,7 @@ module.exports = {
         const otpCode = Math.floor(1000 + Math.random() * 9000)
         const transporter = nodemailer.createTransport({
 
-            service: "hotmail",
+            service: "gmail",
 
             auth: {
                 user: process.env.NODEMAILER_USER,
