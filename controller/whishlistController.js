@@ -1,14 +1,13 @@
 const asyncHandler = require("express-async-handler")
 const Whishlist = require("../schema/whishlistModel")
-require("dotenv").config()
+
 
 module.exports = {
-    addWhishList: asyncHandler(async (req, res, next) => {
+    addWhishList: asyncHandler(async (req, res) => {
         try {
-
             const dbObj = req.body
 
-            const product = Whishlist({
+            const whishlist = Whishlist({
                 turf_user_id: dbObj.turf_user_id,
                 turf_creator_id: dbObj.turf_creator_id,
                 turf_name: dbObj.turf_name,
@@ -52,7 +51,7 @@ module.exports = {
 
             })
 
-            await product.save()
+            await whishlist.save()
 
             res.status(200).json({ "status": true })
 
@@ -70,11 +69,11 @@ module.exports = {
             const findWhishList = await Whishlist.find({ turf_user_id: turf_user_id })
 
             res.status(200).json({ "status": true, "length": findWhishList.length, "data": findWhishList })
-    
+
         } catch (error) {
             res.status(401).json({ "status": false, "length": 0, "data": `error ${error}` })
         }
 
-       
+
     })
 }

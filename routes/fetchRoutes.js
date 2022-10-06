@@ -12,4 +12,7 @@ router.post("/add-whishlist" , whishlistController.addWhishList)
 
 router.get("/get-whishlist/:id" , whishlistController.getWhishList)
 
+router.get("/search-turf/:name" , fetchController.searchProducts)
+
+
 module.exports = router 
