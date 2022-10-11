@@ -1,16 +1,11 @@
 const asyncHandler = require("express-async-handler")
 const User = require("../schema/accountModel")
 const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const { sendOtpEmail } = require("../otpHandler/nodemailer")
 const twilio = require("../otpHandler/twilio")
 const crypto = require("crypto")
-
-
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET)
-}
+const { generateToken } = require('../utils/jwt')
 
 
 module.exports = {
@@ -53,9 +48,9 @@ module.exports = {
                 }
 
                 if (response == null) {
-                    res.status(401).json({ "status": false, "id": "" , "message" : "Enter correct email" })
+                    res.status(401).json({ "status": false, "id": "", "message": "Enter correct email" })
                 } else {
-                    res.status(200).json({ "status": true, "id": user._id , "message" : "OTP sent"})
+                    res.status(200).json({ "status": true, "id": user._id, "message": "OTP sent" })
                 }
             }
 
@@ -73,12 +68,18 @@ module.exports = {
         const { user_otp, _id } = req.body
 
         await User.findById({ _id }).then(async (user) => {
+
             if (user_otp == user.user_otp) {
+
+                const token = generateToken(_id, '3h')
+                const refreshToken= generateToken(_id,'10d')
+
                 await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
-                res.status(200).json({ "status": true, "message": "Verify Success" })
+
+                res.status(200).json({ "status": true, "message": "Verify Success", "token": token ,"refreshToken":refreshToken})
             }
         }).catch((err) => {
-            res.status(401).json({ "status": false, "message": "please check otp" })
+            res.status(401).json({ "status": false, "message": "please check otp", "token": "" })
         })
 
     }),
@@ -86,7 +87,7 @@ module.exports = {
 
     //login
 
-    emailLogin: asyncHandler(async (req, res, next) => {
+    emailLogin: asyncHandler(async (req, res) => {
 
 
         try {
@@ -101,11 +102,12 @@ module.exports = {
 
                 const match = await bcrypt.compare(user_password, findUser.user_password)
 
-                const token = createToken(findUser.id)
+                const token = generateToken(findUser.id, '3h')
+                const refreshToken = generateToken(findUser.id, '10d')
 
                 if (match) {
 
-                    res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token })
+                    res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token,"refreshToken":refreshToken })
                 } else {
                     res.status(401).json({ "status": false, "message": "Password Dosen't Match", "token": "" })
                 }
@@ -138,7 +140,7 @@ module.exports = {
                 const findUser = await User.findOne({ user_number: user_number })
 
                 if (findUser) {
-                    res.status(200).json({ "status": true, "_id": findUser._id ,"message": "OTP sent"})
+                    res.status(200).json({ "status": true, "_id": findUser._id, "message": "OTP sent" })
 
                 } else {
                     const user = User({
@@ -153,10 +155,10 @@ module.exports = {
                 }
 
             } else {
-                res.status(401).json({ "status": false, "_id": "" , "message": "Enter Correct Number" })
+                res.status(401).json({ "status": false, "_id": "", "message": "Enter Correct Number" })
             }
         } catch (error) {
-            res.status(401).json({ "status": false, "_id": "" , "message": error.message })
+            res.status(401).json({ "status": false, "_id": "", "message": error.message })
         }
 
 
@@ -164,7 +166,7 @@ module.exports = {
 
     // verify mobile number
 
-    verifyMobile: asyncHandler(async (req, res, next) => {
+    verifyMobile: asyncHandler(async (req, res) => {
         try {
             const { user_otp, user_number, _id } = req.body
             console.log(user_otp, user_number, _id);
@@ -173,18 +175,19 @@ module.exports = {
             console.log(response);
             console.log("verification progress");
             if (response === 'approved') {
-                const tokn = createToken(_id)
+                const tokn = generateToken(_id, '3h');
+                const refreshToken = generateToken(_id, '10d')
 
                 console.log("account verified");
                 await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
-                res.status(200).json({ "status": true, "jwt": tokn, "message": "Sucsess" })
+                res.status(200).json({ "status": true, "token": tokn,"refreshToke":refreshToken, "message": "Sucsess" })
             } else {
                 console.log("error");
-                res.status(401).json({ "status": false, "jwt": "", "message": "Check OTP" })
+                res.status(401).json({ "status": false, "token": "", "message": "Check OTP" })
             }
         } catch (error) {
-            res.status(401).json({ "status": false, "jwt": "", "message": error.message })
+            res.status(401).json({ "status": false, "token": "", "message": error.message })
         }
     })
 }
