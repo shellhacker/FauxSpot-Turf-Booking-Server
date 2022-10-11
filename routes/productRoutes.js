@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const productController = require("../controller/addProductController")
 const { upload } = require("../uploads/multer")
+const flutter = require("../controller/flutterAdd")
 
 
 router.post("/addturf", upload.fields([
@@ -11,5 +12,7 @@ router.post("/addturf", upload.fields([
 ]), productController.addProduct)
 
 router.patch("/updateturf/:id", productController.updateProduct)
+
+router.post("/add-product" , flutter.addProduct)
 
 module.exports = router   
