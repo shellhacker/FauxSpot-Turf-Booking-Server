@@ -3,8 +3,9 @@ const router = express.Router()
 const fetchController = require("../controller/fetchProductController")
 const vendorController = require("../controller/vendorController")
 const whishlistController = require("../controller/whishlistController")
+const {protect}=require('../middleware/authMiddleware')
 
-router.get("/all-turf" , fetchController.getAllProducts)
+router.get("/all-turf",protect , fetchController.getAllProducts)
 
 router.get("/vendor-turf/:id", vendorController.vendorTurf)
 

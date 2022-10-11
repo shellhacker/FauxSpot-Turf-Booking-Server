@@ -5,6 +5,7 @@ const Product = require("../schema/productModel")
 module.exports = {
 
     getAllProducts: asyncHandler(async (req, res, next) => {
+        console.log(req.user)
         Product.find((err, data) => {
             if (!err) {
                 res.status(200).json({ "status": true, "data": data })
