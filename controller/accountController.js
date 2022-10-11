@@ -53,9 +53,9 @@ module.exports = {
                 }
 
                 if (response == null) {
-                    res.status(401).json({ "status": false, "id": "invalid 401" })
+                    res.status(401).json({ "status": false, "id": "" , "message" : "Enter correct email" })
                 } else {
-                    res.status(200).json({ "status": true, "id": user._id })
+                    res.status(200).json({ "status": true, "id": user._id , "message" : "OTP sent"})
                 }
             }
 
@@ -75,7 +75,7 @@ module.exports = {
         await User.findById({ _id }).then(async (user) => {
             if (user_otp == user.user_otp) {
                 await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
-                res.status(200).json({ "status": true, "message": "login success" })
+                res.status(200).json({ "status": true, "message": "Verify Success" })
             }
         }).catch((err) => {
             res.status(401).json({ "status": false, "message": "please check otp" })
@@ -107,16 +107,16 @@ module.exports = {
 
                     res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token })
                 } else {
-                    res.status(401).json({ "status": false, "message": "Password Dosen't Match", "token": "token" })
+                    res.status(401).json({ "status": false, "message": "Password Dosen't Match", "token": "" })
                 }
 
             } else {
-                res.status(401).json({ "status": false, "message": "User n't registerd", "token": "token" })
+                res.status(401).json({ "status": false, "message": "User n't registerd", "token": "" })
             }
 
         } catch (error) {
 
-            res.status(401).json({ "status": false, "message": "ClientError", "token": "token" })
+            res.status(401).json({ "status": false, "message": error.message, "token": "" })
 
         }
 
@@ -125,34 +125,40 @@ module.exports = {
 
     // login with number
 
-    mobileSignup: asyncHandler(async (req, res, next) => {
-        const { user_number } = req.body
-        const result = await twilio.sendOtp(user_number)
+    mobileSignup: asyncHandler(async (req, res) => {
 
-        console.log(result);
+        try {
+            const { user_number } = req.body
+            const result = await twilio.sendOtp(user_number)
 
-        if (result == "verification") {
+            console.log(result);
 
-            const findUser = await User.findOne({ user_number: user_number })
+            if (result == "verification") {
 
-            if (findUser) {
-                res.status(200).json({ "status": true, "_id": findUser._id })
+                const findUser = await User.findOne({ user_number: user_number })
+
+                if (findUser) {
+                    res.status(200).json({ "status": true, "_id": findUser._id ,"message": "OTP sent"})
+
+                } else {
+                    const user = User({
+                        user_mail: crypto.randomBytes(64).toString("hex"),
+                        user_number,
+                        user_password: crypto.randomBytes(64).toString("hex"),
+                        user_isVerified: false,
+                    })
+
+                    await user.save()
+                    res.status(200).json({ "status": true, "_id": user._id, "message": "OTP sent" })
+                }
 
             } else {
-                const user = User({
-                    user_mail: crypto.randomBytes(64).toString("hex"),
-                    user_number,
-                    user_password: crypto.randomBytes(64).toString("hex"),
-                    user_isVerified: false,
-                })
-
-                await user.save()
-                res.status(200).json({ "status": true, "_id": user._id , "otp" : result})
+                res.status(401).json({ "status": false, "_id": "" , "message": "Enter Correct Number" })
             }
-
-        } else {
-            res.status(401).json({ "status": false, "_id": "user not found" })
+        } catch (error) {
+            res.status(401).json({ "status": false, "_id": "" , "message": error.message })
         }
+
 
     }),
 
@@ -167,18 +173,18 @@ module.exports = {
             console.log(response);
             console.log("verification progress");
             if (response === 'approved') {
-                const tokn =  createToken(_id)
-                
+                const tokn = createToken(_id)
+
                 console.log("account verified");
-                const add = await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
-               
-                res.status(200).json({ "status": true, "jwt": tokn })
+                await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
+
+                res.status(200).json({ "status": true, "jwt": tokn, "message": "Sucsess" })
             } else {
                 console.log("error");
-                res.status(401).json({ "status": false, "jwt": "chcek otp" })
+                res.status(401).json({ "status": false, "jwt": "", "message": "Check OTP" })
             }
         } catch (error) {
-            res.status(401).json({ "status": false, "jwt": "tokn not found" })
+            res.status(401).json({ "status": false, "jwt": "", "message": error.message })
         }
     })
 }
