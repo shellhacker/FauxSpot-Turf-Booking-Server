@@ -14,9 +14,11 @@ const protect = asyncHandler(async (req, res, next) => {
     ) {
         try {
             //===================== TOKEN FROM HEADER ======================
+
             token = req.headers.authorization.split(" ")[1];
 
             //===================== VERIFY TOKEN ==========================
+            
             const decoded = verifyToken(token)
 
             //=============== USER FROM THE TOKEN ======================
@@ -26,19 +28,18 @@ const protect = asyncHandler(async (req, res, next) => {
         } catch (error) {
             if (error.message == "jwt expired") {
 
-                res.status(403);
-                throw new Error(error);
+                res.status(403).json({ "status": false, "message": "Token expired" });
+
             } else {
-                console.log(error.message);
-                res.status(401);
-                throw new Error(error.message);
+
+                res.status(401).json({ "status": false, "message": "Invlaid token" });
             }
         }
     }
     if (!token) {
-        res.status(401);
-        throw new Error("Not authorized,no token");
-      }
+        res.status(401).json({ "status": false, "message": "Token not found" });
+
+    }
 })
 
-module.exports={protect}
+module.exports = { protect }
