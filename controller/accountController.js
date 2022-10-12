@@ -72,11 +72,11 @@ module.exports = {
             if (user_otp == user.user_otp) {
 
                 const token = generateToken(_id, '3h')
-                const refreshToken= generateToken(_id,'10d')
+                const refreshToken = generateToken(_id, '10d')
 
                 await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
-                res.status(200).json({ "status": true, "message": "Verify Success", "token": token ,"refreshToken":refreshToken})
+                res.status(200).json({ "status": true, "message": "Verify Success", "token": token, "refreshToken": refreshToken })
             }
         }).catch((err) => {
             res.status(401).json({ "status": false, "message": "please check otp", "token": "" })
@@ -94,9 +94,9 @@ module.exports = {
 
             const { user_mail, user_password } = req.body
 
-            console.log(user_mail, user_password);
-
             const findUser = await User.findOne({ user_mail: user_mail })
+
+            console.log(findUser);
 
             if (findUser) {
 
@@ -106,8 +106,11 @@ module.exports = {
                 const refreshToken = generateToken(findUser.id, '10d')
 
                 if (match) {
-
-                    res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token,"refreshToken":refreshToken })
+                    if (findUser.user_isVerified) {
+                        res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token, "refreshToken": refreshToken })
+                    } else {
+                        res.status(401).json({ "status": false, "message": "User n't verified", "token": "" })
+                    }
                 } else {
                     res.status(401).json({ "status": false, "message": "Password Dosen't Match", "token": "" })
                 }
@@ -181,7 +184,7 @@ module.exports = {
                 console.log("account verified");
                 await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
-                res.status(200).json({ "status": true, "token": token,"refreshToke":refreshToken, "message": "Sucsess" })
+                res.status(200).json({ "status": true, "token": token, "refreshToke": refreshToken, "message": "Sucsess" })
             } else {
                 console.log("error");
                 res.status(401).json({ "status": false, "token": "", "message": "Check OTP" })
