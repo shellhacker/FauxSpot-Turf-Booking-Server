@@ -12,7 +12,7 @@ router.post("/verify-email-otp", accountController.emailVerifyOtp)
 
 router.post("/verify-number-otp", accountController.verifyMobile)
 
-router.post("/login-number", accountController.mobileSignup)
+router.post("/loginwith-number", accountController.mobileSignup)
 
 router.post("/refresh-token" , refreshController.refreshAccsessToken)
 

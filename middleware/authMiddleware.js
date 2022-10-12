@@ -7,7 +7,6 @@ const User = require('../schema/accountModel');
 
 const protect = asyncHandler(async (req, res, next) => {
     let token;
-    console.log('mid');
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
@@ -18,7 +17,7 @@ const protect = asyncHandler(async (req, res, next) => {
             token = req.headers.authorization.split(" ")[1];
 
             //===================== VERIFY TOKEN ==========================
-            
+
             const decoded = verifyToken(token)
 
             //=============== USER FROM THE TOKEN ======================
