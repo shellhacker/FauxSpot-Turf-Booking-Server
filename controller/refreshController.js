@@ -6,7 +6,6 @@ module.exports = {
     refreshAccsessToken: asyncHandler(async (req, res) => {
         console.log("==================================");
         const obj = req.body
-        console.log(obj.refreshToken);
         let token;
         if (obj.refreshToken) {
             try {
