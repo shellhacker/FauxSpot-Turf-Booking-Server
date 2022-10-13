@@ -15,5 +15,6 @@ router.get("/get-whishlist/:id" , whishlistController.getWhishList)
 
 router.get("/search-turf/:name" , fetchController.searchProducts)
 
+router.get("/nearest-turf/:place" , fetchController.getNearbyProducts) 
 
 module.exports = router 

@@ -20,11 +20,9 @@ module.exports = {
 
         try {
             const findData = await Product.find({ turf_muncipality: turf_muncipality })
-            if (findData.length > 0) {
-                res.status(200).json({ "status": true, "data": findData })
-            } else {
-                res.status(200).json({ "status": false, "data": findData })
-            }
+
+            res.status(200).json({ "status": false, "data": findData })
+
 
         } catch (error) {
             res.status(401).json({ "status": false, "message": `invalid 401 ${error}` })
