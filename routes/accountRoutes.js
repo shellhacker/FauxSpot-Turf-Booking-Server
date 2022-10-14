@@ -16,6 +16,4 @@ router.post("/loginwith-number", accountController.mobileSignup)
 
 router.post("/refresh-token" , refreshController.refreshAccsessToken)
 
-router.get("/nearest-turf/:place")
-
 module.exports = router
