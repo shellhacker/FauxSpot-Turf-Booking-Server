@@ -71,8 +71,8 @@ module.exports = {
 
             if (user_otp == user.user_otp) {
 
-                const token = generateToken(_id, '3h')
-                const refreshToken = generateToken(_id, '10d')
+                const token = generateToken(_id, '1d')
+                const refreshToken = generateToken(_id, '100d')
 
                 await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
@@ -102,8 +102,8 @@ module.exports = {
 
                 const match = await bcrypt.compare(user_password, findUser.user_password)
 
-                const token = generateToken(findUser.id, '3h')
-                const refreshToken = generateToken(findUser.id, '10d')
+                const token = generateToken(findUser.id, '1d')
+                const refreshToken = generateToken(findUser.id, '100d')
 
                 if (match) {
                     if (findUser.user_isVerified) {
@@ -178,8 +178,8 @@ module.exports = {
             console.log(response);
             console.log("verification progress");
             if (response === 'approved') {
-                const token = generateToken(_id, '3h');
-                const refreshToken = generateToken(_id, '10d')
+                const token = generateToken(_id, '1h');
+                const refreshToken = generateToken(_id, '100d')
 
                 console.log("account verified");
                 await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
