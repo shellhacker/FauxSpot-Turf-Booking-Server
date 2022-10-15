@@ -22,7 +22,7 @@ Email account Create
 ```python
 Link: http://localhost:3000/account/signup-email
 
-post
+Post Method
 
 {
     "user_mail" : "fouvty@mail.com",
@@ -40,7 +40,7 @@ Email account Verify
 ```python
 Link: http://localhost:3000/account/verify-email-otp
 
-post
+Post Method
 
 {
     "user_otp" : "7843",
@@ -58,7 +58,7 @@ Email Account Login
 ```python
 Link: http://localhost:3000/account/login-email
 
-post
+Post Method
 
 {
     "user_mail" : "mail.musthak@gmail.com",
@@ -82,7 +82,7 @@ support only India
 ```python
 Link: http://localhost:3000/account/loginwith-number
 
-post
+Post Method
 
 {
     "user_number" : 1234567890
@@ -99,7 +99,7 @@ Verify OTP
 ```python
 Link: http://localhost:3000/account/verify-number-otp
 
-post
+Post Method
 
 {
     "user_otp" : "208623",
