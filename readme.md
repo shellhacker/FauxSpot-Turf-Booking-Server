@@ -15,7 +15,7 @@ PORT = 3000
 MONGO_URI = "Your Database URL "
 JWT_SECRET = "mushthak"
 NODEMAILER_PASS = "Your Email id "
-NODEMAILER_USER = ""Your Email Password " 
+NODEMAILER_USER = "Your Email Password " 
 
 TWILIO_ACCOUNT_SID = "Your Twilio Sid"
 TWILIO_AUTH_TOKEN = "Your Twilio Token"
