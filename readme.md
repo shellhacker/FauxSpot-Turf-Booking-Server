@@ -73,7 +73,9 @@ response
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjZlN"
 }
 ```
+
 ## Account (Login/SignUp) Response through Phone Number
+
 Phone number OTP sent 
 
 support only India
@@ -113,7 +115,7 @@ response
 }
 ```
 
-##Fetch Data
+## Fetch Nearest Data
 
 Required Header Authorization Bearer Token
 
