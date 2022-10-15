@@ -1,6 +1,12 @@
 # FauxSpot - TurfBooking - With eCommerce
 
+Require Env File
 
+```bash
+Create .env 
+
+CLOUDINARY_API_KEY = "Your Cloudinary Api Key"  [Create]([https://github.com/MushthakVP/Faux-Spot.git](https://cloudinary.com/))
+```
 
 ## Installation
 
