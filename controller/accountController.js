@@ -184,7 +184,7 @@ module.exports = {
                 console.log("account verified");
                 await User.findByIdAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
-                res.status(200).json({ "status": true, "token": token, "refreshToke": refreshToken, "message": "Sucsess" })
+                res.status(200).json({ "status": true, "token": token, "refreshToken": refreshToken, "message": "Sucsess" })
             } else {
                 console.log("error");
                 res.status(401).json({ "status": false, "token": "", "message": "Check OTP" })
