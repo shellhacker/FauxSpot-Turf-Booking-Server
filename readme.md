@@ -9,7 +9,7 @@ Use the package
 ```bash
 npm install
 ```
-Download MongoDB Community Edition version(5.0)
+Download MongoDB Community Edition version(5.0) OR Atlas
 
 Server run
 
