@@ -78,7 +78,7 @@ Phone number OTP sent
 
 support only India
 ```python
-Link: http://localhost:3000/account/login-number
+Link: http://localhost:3000/account/loginwith-number
 
 post
 
