@@ -13,7 +13,7 @@ const fetchRoutes = require("./routes/fetchRoutes")
 
 db()
 
-// local host
+// local host Port 
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000
@@ -36,3 +36,5 @@ app.use("/account", accountRoutes)
 app.use("/vendor", productRoutes)
 
 app.use("/user" , fetchRoutes)
+
+//interceptor
