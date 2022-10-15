@@ -5,9 +5,9 @@ Require Env File
 ```bash
 Create .env 
 
-CLOUDINARY_API_KEY = "Your Cloudinary Api Key"  [Create](https://cloudinary.com/)
+CLOUDINARY_API_KEY = "Your Cloudinary Api Key"  [a link](https://github.com/user/repo/blob/branch/other_file.md)
 ```
-
+[a link](https://github.com/user/repo/blob/branch/other_file.md)
 ## Installation
 
 Use the package 
