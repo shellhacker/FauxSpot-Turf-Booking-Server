@@ -47,7 +47,7 @@ Post Method
     "_id": "6326e7d3b100a562a578b33d"
 }
 
-response
+Response
 
 {
     "status": true,
@@ -65,7 +65,7 @@ Post Method
     "user_password" : "12345"
 }
 
-response
+Response
 
 {
     "status": true,
@@ -88,7 +88,7 @@ Post Method
     "user_number" : 1234567890
 }
 
-response
+Response
 
 {
     "status": true,
@@ -107,7 +107,7 @@ Post Method
     "_id":"6326eb838f2fb4913564bf75"
 }
 
-response
+Response
 
 {
     "status": true,
@@ -124,7 +124,7 @@ Link: http://localhost:3000/user/nearest-turf/"DistrictName"
 
 Get Method
 
-response
+Response
 
 {
   "data": [
