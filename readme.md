@@ -5,7 +5,23 @@ Require Env File
 ```bash
 Create .env 
 
-CLOUDINARY_API_KEY = "Your Cloudinary Api Key"  Link : https://cloudinary.com/
+CLOUDINARY_API_KEY = "Your Cloudinary Api Key" 
+CLOUDINARY_API_SECRET = "Your Cloudinary Api Secret " 
+CLOUD_NAME = "Your Cloudinary Cloud Name " 
+
+Link Cloudinary : https://cloudinary.com/
+
+PORT = 3000
+MONGO_URI = "Your Database URL "
+JWT_SECRET = "mushthak"
+NODEMAILER_PASS = "Your Email id "
+NODEMAILER_USER = ""Your Email Password " 
+
+TWILIO_ACCOUNT_SID = "Your Twilio Sid"
+TWILIO_AUTH_TOKEN = "Your Twilio Token"
+TWILIO_SERVIECE_ID = "Your Twilio Service ID"
+
+Link Twilio : https://www.twilio.com
 ```
 
 ## Installation
