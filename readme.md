@@ -124,54 +124,52 @@ Get Method
 
 response
 
-{"data" : [
+{
+  "data": [
     {
-"turf_catogery": {
-"turf_cricket": false,
-"turf_football": true,
-"turf_badminton": false,
-"turf_yoga": false
-},
-"turf_type": {
-"turf_sevens": true,
-"turf_sixes": true
-},
-"turf_info": {
-"turf_isAvailale": true,
-"turf_rating": 3.2,
-"turf_map": "https://goo.gl/maps/hNeKFEpkHocAJyzdA"
-},
-"turf_amenities": {
-"turf_washroom": false,
-"turf_water": true,
-"turf_dressing": true,
-"turf_parking": true,
-"turf_gallery": false,
-"turf_cafeteria": true
-},
-"turf_images": {
-"turf_images1": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287855/FauxSpotServer/1musthak8.jpg",
-"turf_images2": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287864/FauxSpotServer/7musthak2.jpg",
-"turf_images3": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287868/FauxSpotServer/6musthak5.jpg"
-},
-"turf_time": {
-"time_morning": "1000",
-"time_afternoon": "1200",
-"time_evening": "1600"
-},
-"_id": "6342471956b46c8435fc95fb",
-"turf_creator_id": "63355665136e1b3ecb0db5d6",
-"turf_name": "Crashing Amigos",
-"turf_place": "Kottapuram",
-"turf_muncipality": "Tirurangadi",
-"turf_district": "Malappuram"
-
+      "turf_catogery": {
+        "turf_cricket": false,
+        "turf_football": true,
+        "turf_badminton": false,
+        "turf_yoga": false
+      },
+      "turf_type": {
+        "turf_sevens": true,
+        "turf_sixes": true
+      },
+      "turf_info": {
+        "turf_isAvailale": true,
+        "turf_rating": 3.2,
+        "turf_map": "https://goo.gl/maps/hNeKFEpkHocAJyzdA"
+      },
+      "turf_amenities": {
+        "turf_washroom": false,
+        "turf_water": true,
+        "turf_dressing": true,
+        "turf_parking": true,
+        "turf_gallery": false,
+        "turf_cafeteria": true
+      },
+      "turf_images": {
+        "turf_images1": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287855/FauxSpotServer/1musthak8.jpg",
+        "turf_images2": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287864/FauxSpotServer/7musthak2.jpg",
+        "turf_images3": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287868/FauxSpotServer/6musthak5.jpg"
+      },
+      "turf_time": {
+        "time_morning": "1000",
+        "time_afternoon": "1200",
+        "time_evening": "1600"
+      },
+      "_id": "6342471956b46c8435fc95fb",
+      "turf_creator_id": "63355665136e1b3ecb0db5d6",
+      "turf_name": "Crashing Amigos",
+      "turf_place": "Kottapuram",
+      "turf_muncipality": "Tirurangadi",
+      "turf_district": "Malappuram"
+    }
+  ]
 }
-    
-    
-    
-    
-]}
+
 ```
 
 ## Contributing
