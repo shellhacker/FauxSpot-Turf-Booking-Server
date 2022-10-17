@@ -113,6 +113,17 @@ response
 }
 ```
 
+Fetch Wishlist
+```python
+Link: http://localhost:3000/user/get-whishlist/"User Id"
+
+Get Method
+
+
+```
+
+
+
 ## Contributing
 Pull requests are welcome. For significant changes, please open an issue to discuss what you would like to change.
 
