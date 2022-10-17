@@ -10,7 +10,7 @@ module.exports = {
             const findProduct = await Whishlist.findOne({ turf_name: dbObj.data[0].turf_name })
 
             if (findProduct) {
-                res.status(200).json({ message: "Product already added to wishlist" })
+                res.status(401).json({ message: "Product already added to wishlist" })
             }
 
             const whishlist = Whishlist({
