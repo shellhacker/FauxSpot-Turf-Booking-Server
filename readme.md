@@ -136,7 +136,6 @@ Response
     "jwt": "eyJhbGcfhjkh.kjhioudyhuy.dshuihddja6PCXcwdjh5A1Rc"
 }
 ```
-<<<<<<< feature
 Fetch Wishlist
 ```python
 Link: http://localhost:3000/user/get-whishlist/"User Id"
@@ -146,8 +145,6 @@ Get Method
 
 ```
 
-
-=======
 ## Fetch Nearest Data
 
 Required Header Authorization Bearer Token
