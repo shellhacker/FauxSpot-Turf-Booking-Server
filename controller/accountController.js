@@ -107,7 +107,7 @@ module.exports = {
 
                 if (match) {
                     if (findUser.user_isVerified) {
-                        res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token, "refreshToken": refreshToken })
+                        res.status(200).json({ "status": true, "message": "Loged in succsess", "token": token, "refreshToken": refreshToken , "_id" : findUser.id })
                     } else {
                         res.status(401).json({ "status": false, "message": "User n't verified", "token": "" })
                     }
