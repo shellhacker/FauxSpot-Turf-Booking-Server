@@ -74,9 +74,9 @@ module.exports = {
                 const token = generateToken(_id, '1d')
                 const refreshToken = generateToken(_id, '100d')
 
-                await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
+            const findUser = await User.findOneAndUpdate({ _id: _id }, { $set: { user_isVerified: true } })
 
-                res.status(200).json({ "status": true, "message": "Verify Success", "token": token, "refreshToken": refreshToken })
+                res.status(200).json({ "status": true, "message": "Verify Success", "token": token, "refreshToken": refreshToken , "_id" : findUser.id})
             }
         }).catch((err) => {
             res.status(401).json({ "status": false, "message": "please check otp", "token": "" })
