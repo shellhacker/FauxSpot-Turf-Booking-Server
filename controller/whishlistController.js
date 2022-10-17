@@ -7,6 +7,12 @@ module.exports = {
         try {
             const dbObj = req.body
 
+            const findProduct = await Whishlist.findOne({ turf_name: dbObj.data[0].turf_name })
+
+            if (findProduct) {
+                res.status(200).json({ message: "Product already added to wishlist" })
+            }
+
             const whishlist = Whishlist({
                 turf_user_id: dbObj.turf_user_id,
                 turf_creator_id: dbObj.data[0].turf_creator_id,
