@@ -8,6 +8,7 @@ const morgan = require("morgan")
 const colors = require('colors')
 const bodyParser = require("body-parser");
 const fetchRoutes = require("./routes/fetchRoutes")
+const bookingRoutes = require("./routes/fetchRoutes")
 
 // db connect
 
@@ -36,5 +37,8 @@ app.use("/account", accountRoutes)
 app.use("/vendor", productRoutes)
 
 app.use("/user" , fetchRoutes)
+
+app.use("/turf" , bookingRoutes)
+
 
 //interceptor
