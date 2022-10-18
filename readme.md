@@ -142,6 +142,57 @@ Link: http://localhost:3000/user/get-whishlist/"User Id"
 
 Get Method
 
+Response
+
+{
+  "status": true,
+  "length": 1,
+  "data": [
+    {
+      "turf_catogery": {
+        "turf_cricket": false,
+        "turf_football": false,
+        "turf_badminton": false,
+        "turf_yoga": true
+      },
+      "turf_type": {
+        "turf_sevens": false,
+        "turf_sixes": false
+      },
+      "turf_info": {
+        "turf_isAvailale": true,
+        "turf_rating": 3.2,
+        "turf_map": "https://goo.gl/maps/J52rSt5Kj2byPpDTA"
+      },
+      "turf_amenities": {
+        "turf_washroom": true,
+        "turf_water": true,
+        "turf_dressing": true,
+        "turf_parking": true,
+        "turf_gallery": false,
+        "turf_cafeteria": true
+      },
+      "turf_images": {
+        "turf_images1": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287435/FauxSpotServer/6musthak1.jpg",
+        "turf_images2": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287438/FauxSpotServer/1musthak4.jpg",
+        "turf_images3": "https://res.cloudinary.com/fouvtycloud/image/upload/v1665287441/FauxSpotServer/3musthak9.jpg"
+      },
+      "turf_time": {
+        "time_morning": "100",
+        "time_afternoon": "100",
+        "time_evening": "100"
+      },
+      "_id": "634d4e83f856564bcd05a237",
+      "turf_user_id": "63469bcad9ce0474dd70083c",
+      "turf_creator_id": "63355665136e1b3ecb0db5d6",
+      "turf_name": "Yoga Delight",
+      "turf_place": "Thenhipalam",
+      "turf_muncipality": "Tirurangadi",
+      "turf_district": "Malappuram",
+      "__v": 0
+    }
+  ]
+}
 
 ```
 
