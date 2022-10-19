@@ -3,7 +3,7 @@ const User = require("../schema/accountModel")
 const { generateToken, verifyToken } = require('../utils/jwt')
 
 module.exports = {
-    refreshAccsessToken: asyncHandler(async (req, res) => {
+    refreshAccessToken: asyncHandler(async (req, res) => {
         const obj = req.body
         let token;
         if (obj.refreshToken) {
