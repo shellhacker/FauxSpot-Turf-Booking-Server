@@ -1,37 +1,37 @@
 const asyncHandler = require("express-async-handler");
-const Whishlist = require("../schema/whishlistModel");
+const Wishlist = require("../schema/wishlistModel");
 
 module.exports = {
   addWhishList: asyncHandler(async (req, res) => {
     try {
       const dbObj = req.body;
 
-      const findProduct = await Whishlist.findOne({
+      const findProduct = await Wishlist.findOne({
         turf_name: dbObj.data[0].turf_name,
       });
 
       if (findProduct) {
-        res.status(401).json({ message: "Product already added to wishlist" });
+        res.status(401).json({ message: "Product already added to wishlist"});
       } else {
-        const whishlist = Whishlist({
+        const wishlist = Wishlist({
           turf_user_id: dbObj.turf_user_id,
           turf_creator_id: dbObj.data[0].turf_creator_id,
           turf_name: dbObj.data[0].turf_name,
           turf_place: dbObj.data[0].turf_place,
-          turf_muncipality: dbObj.data[0].turf_muncipality,
+          turf_municipality: dbObj.data[0].turf_municipality,
           turf_district: dbObj.data[0].turf_district,
-          turf_catogery: {
-            turf_cricket: dbObj.data[0].turf_catogery.turf_cricket,
-            turf_football: dbObj.data[0].turf_catogery.turf_football,
-            turf_badminton: dbObj.data[0].turf_catogery.turf_badminton,
-            turf_yoga: dbObj.data[0].turf_catogery.turf_yoga,
+          turf_category: {
+            turf_cricket: dbObj.data[0].turf_category.turf_cricket,
+            turf_football: dbObj.data[0].turf_category.turf_football,
+            turf_badminton: dbObj.data[0].turf_category.turf_badminton,
+            turf_yoga: dbObj.data[0].turf_category.turf_yoga,
           },
           turf_type: {
             turf_sevens: dbObj.data[0].turf_type.turf_sevens,
             turf_sixes: dbObj.data[0].turf_type.turf_sixes,
           },
           turf_info: {
-            turf_isAvailale: dbObj.data[0].turf_info.turf_isAvailale,
+            turf_isAvailable: dbObj.data[0].turf_info.turf_isAvailable,
             turf_rating: dbObj.data[0].turf_info.turf_rating,
             turf_map: dbObj.data[0].turf_info.turf_map,
           },
@@ -55,7 +55,7 @@ module.exports = {
           },
         });
 
-        await whishlist.save();
+        await wishlist.save();
 
         res.status(200).json({ status: true });
       }
@@ -67,7 +67,7 @@ module.exports = {
   getWhishList: asyncHandler(async (req, res, next) => {
     const turf_user_id = req.params.id;
     try {
-      const findWhishList = await Whishlist.find({
+      const findWhishList = await Wishlist.find({
         turf_user_id: turf_user_id,
       });
 
