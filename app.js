@@ -8,12 +8,13 @@ const morgan = require("morgan")
 const colors = require('colors')
 const bodyParser = require("body-parser");
 const fetchRoutes = require("./routes/fetchRoutes")
+const bookingRoutes = require("./routes/fetchRoutes")
 
 // db connect
 
 db()
 
-// local host
+// local host Port 
 
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000
@@ -36,3 +37,8 @@ app.use("/account", accountRoutes)
 app.use("/vendor", productRoutes)
 
 app.use("/user" , fetchRoutes)
+
+app.use("/turf" , bookingRoutes)
+
+
+//interceptor
